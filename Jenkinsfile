@@ -5,6 +5,7 @@ pipeline {
     agent {
         docker {
             image 'mcp/playwright:latest'
+            args 'entrypoint='
         }
     }
     stages {
