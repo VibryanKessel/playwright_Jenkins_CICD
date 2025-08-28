@@ -18,7 +18,6 @@ pipeline {
                 stage {
                     sh 'batchs/run_login.sh'
                 }
-                }
                 stage {
                     sh 'batchs/menu.sh'
                 }
