@@ -15,13 +15,13 @@ pipeline {
         }
         stage('Run TNR') {
             parallel{
-                steps {
+                stage {
                     sh 'batchs/run_login.sh'
                 }
                 }
-                    steps {
-                        sh 'batchs/menu.sh'
-                    }
+                stage {
+                    sh 'batchs/menu.sh'
+                }
                 }
             }
         stage('Run AddCandidate Tests') {
@@ -34,6 +34,7 @@ pipeline {
                 sh 'batchs/run_tnr.sh'
             }
         }
+
     post {
         always {
             allure includeProperties:
