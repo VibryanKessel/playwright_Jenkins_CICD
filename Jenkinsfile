@@ -13,21 +13,28 @@ pipeline {
                 sh 'npm ci'
             }
         }
+
         stage('Run TNR') {
-            parallel{
-                stage {
-                    sh 'batchs/run_login.sh'
+            parallel {
+                stage('Run Login') {
+                    steps {
+                        sh 'batchs/run_login.sh'
+                    }
                 }
-                stage {
-                    sh 'batchs/menu.sh'
+                stage('Run Menu') {
+                    steps {
+                        sh 'batchs/menu.sh'
+                    }
                 }
             }
-            }
+        }
+
         stage('Run AddCandidate Tests') {
             steps {
                 sh 'batchs/run_add_candidate.sh'
             }
         }
+
         stage('Run Parcours TNR') {
             steps {
                 sh 'batchs/run_tnr.sh'
@@ -37,12 +44,12 @@ pipeline {
 
     post {
         always {
-            allure includeProperties:
-            false,
-            jdk: '',
-            results: [[path: 'allure-results']]
+            allure(
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'allure-results']]
+            )
             archiveArtifacts artifacts: "playwright-report/**", allowEmptyArchive: true
         }
-
     }
 }
