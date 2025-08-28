@@ -34,7 +34,6 @@ pipeline {
                 sh 'batchs/run_tnr.sh'
             }
         }
-    }
     post {
         always {
             allure includeProperties:
@@ -44,6 +43,5 @@ pipeline {
             archiveArtifacts artifacts: "playwright-report/**", allowEmptyArchive: true
         }
 
-                }
     }
 }
