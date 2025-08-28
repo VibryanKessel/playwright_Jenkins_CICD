@@ -21,7 +21,7 @@ pipeline {
                 stage {
                     sh 'batchs/menu.sh'
                 }
-                }
+            }
             }
         stage('Run AddCandidate Tests') {
             steps {
@@ -33,6 +33,7 @@ pipeline {
                 sh 'batchs/run_tnr.sh'
             }
         }
+    }
 
     post {
         always {
